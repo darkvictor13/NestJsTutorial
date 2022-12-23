@@ -9,16 +9,34 @@ export class CustomerService {
       id: 1,
       name: 'John Doe',
       email: 'john@gmail.com',
+      address: {
+        line1: 'a',
+        zip: 'b',
+        street: 'c',
+        state: 'd',
+      },
     },
     {
       id: 2,
       name: 'Jane Doe',
       email: 'jane@gmail.com',
+      address: {
+        line1: 'a',
+        zip: 'b',
+        street: 'c',
+        state: 'd',
+      },
     },
     {
       id: 3,
       name: 'John Smith',
       email: 'smith@gmail.com',
+      address: {
+        line1: 'a',
+        zip: 'b',
+        street: 'c',
+        state: 'd',
+      },
     },
   ];
 
