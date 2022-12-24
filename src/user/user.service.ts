@@ -7,18 +7,22 @@ import { User } from './types/user';
 export class UserService {
   private users: User[] = [
     {
+      id: 1,
       username: 'john',
       password: 'changeme',
     },
     {
+      id: 2,
       username: 'chris',
       password: 'secret',
     },
     {
+      id: 3,
       username: 'maria',
       password: 'guess',
     },
     {
+      id: 4,
       username: 'admin',
       password: 'admin',
     },
@@ -31,6 +35,15 @@ export class UserService {
   getUserByUsername(username: string): SerializedUser {
     for (const user of this.users) {
       if (user.username === username) {
+        return plainToInstance(SerializedUser, user);
+      }
+    }
+    return null;
+  }
+
+  getUserById(id: number): SerializedUser {
+    for (const user of this.users) {
+      if (user.id === id) {
         return plainToInstance(SerializedUser, user);
       }
     }

@@ -19,7 +19,7 @@ export class CustomerController {
 
   @Get(':id')
   getCustomer(@Param('id', ParseIntPipe) id: number) {
-    const customer = this.customerService.findCustomerById(id);
+    const customer = this.customerService.getCustomerById(id);
     if (!customer) {
       throw new HttpException('Customer not found', HttpStatus.BAD_REQUEST);
     }
@@ -28,7 +28,7 @@ export class CustomerController {
 
   @Get('')
   getCustomers() {
-    return this.customerService.findCustomers();
+    return this.customerService.getCustomers();
   }
 
   @Post()

@@ -40,11 +40,11 @@ export class CustomerService {
     },
   ];
 
-  findCustomerById(id: number): Customer {
+  getCustomerById(id: number): Customer {
     return this.customers.find((customer) => customer.id === id);
   }
 
-  findCustomers(): Customer[] {
+  getCustomers(): Customer[] {
     return this.customers;
   }
 
