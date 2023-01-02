@@ -23,7 +23,6 @@ export class User {
   @Column({
     nullable: false,
     default: '',
-    name: 'email_address',
   })
-  emailAddress: string;
+  email: string;
 }
