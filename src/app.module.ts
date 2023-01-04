@@ -4,6 +4,7 @@ import entities from './config/typeorm.config';
 import { CustomerModule } from './customer/customer.module';
 import getPassword from './gitignorethis';
 import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { UserModule } from './user/user.module';
       entities: entities,
       synchronize: true,
     }),
+    AuthModule,
   ],
   controllers: [],
   providers: [],
