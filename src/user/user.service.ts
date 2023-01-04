@@ -5,12 +5,14 @@ import { CreateUserDto } from './dtos/create_user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './user.entity';
 import { Repository } from 'typeorm';
+import { PasswordService } from './password/password.service';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
+    private readonly passwordService: PasswordService,
   ) {}
 
   getUsers(): Promise<User[]> {
@@ -34,7 +36,12 @@ export class UserService {
   }
 
   createUser(createUserDto: CreateUserDto) {
-    const newUser = this.userRepository.create(createUserDto);
+    const password = this.passwordService.hashPassword(createUserDto.password);
+    console.log(password);
+    const newUser = this.userRepository.create({
+      ...createUserDto,
+      password,
+    });
     return plainToInstance(SerializedUser, this.userRepository.save(newUser));
   }
 }

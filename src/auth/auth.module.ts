@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { PasswordService } from 'src/user/password/password.service';
 import { User } from 'src/user/user.entity';
 import { UserService } from 'src/user/user.service';
 import { AuthController } from './auth.controller';
@@ -20,6 +21,7 @@ import { LocalStrategy } from './strategies/local.strategy';
       useClass: UserService,
     },
     LocalStrategy,
+    PasswordService,
   ],
 })
 export class AuthModule {}
