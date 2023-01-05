@@ -8,10 +8,12 @@ import {
   ParseIntPipe,
   Post,
   UseFilters,
+  UseGuards,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
+import { AuthenticationGuard } from 'src/auth/guards/authentication.guard';
 import { CreateUserDto } from './dtos/create_user.dto';
 import { UserNotFoundException } from './exceptions/user_not_found.exception';
 import { UserHttpExceptionFilter } from './filters/user_http_exception.filter';
@@ -23,12 +25,14 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get()
+  @UseGuards(AuthenticationGuard)
   async getUsers() {
     return plainToInstance(SerializedUser, await this.userService.getUsers());
   }
 
   @Get('name/:username')
   @UseFilters(UserHttpExceptionFilter)
+  @UseGuards(AuthenticationGuard)
   async getUserByUsername(
     @Param('username') username: string,
   ): Promise<SerializedUser> {
@@ -41,6 +45,7 @@ export class UserController {
 
   @Get('id/:id')
   @UseFilters(UserHttpExceptionFilter)
+  @UseGuards(AuthenticationGuard)
   async getUserById(
     @Param('id', ParseIntPipe) id: number,
   ): Promise<SerializedUser> {
@@ -53,6 +58,7 @@ export class UserController {
 
   @Post()
   @UsePipes(ValidationPipe)
+  @UseGuards(AuthenticationGuard)
   createUser(@Body() createUserDto: CreateUserDto) {
     return this.userService.createUser(createUserDto);
   }
